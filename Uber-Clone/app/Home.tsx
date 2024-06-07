@@ -1,53 +1,65 @@
-import { View, Text, SafeAreaView, Image } from 'react-native'
-import React, { useEffect, useLayoutEffect } from 'react'
+import { View, SafeAreaView, Image } from 'react-native'
+import React, { useLayoutEffect } from 'react'
 import { useNavigation } from 'expo-router'
-import { Header } from 'react-native/Libraries/NewAppScreen'
 import NavOption from '@/components/NavOption'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { GOOGLE_MAPS_APIKEY } from '@env';
+import { useDispatch } from 'react-redux'
+import { setOrgin, setdestination } from '@/features/navSlice';
+
+
 const Home: React.FC = () => {
     const navigation = useNavigation()
+    const dispatch = useDispatch()
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerShown:false,
+            headerShown: false,
         })
     }, [])
 
     return (
         <SafeAreaView className='h-full'>
             <View className='p-5'>
-               <Image
-               source={{
-                uri: 'https://links.papareact.com/gzs',
-                
-               }}style={{width:100,height:100,resizeMode:'contain'}} />
-               <GooglePlacesAutocomplete
-                placeholder='Where From'
-                nearbyPlacesAPI='GooglePlacesSearch'
-                debounce={400}
-                minLength={2}
-                enablePoweredByContainer={false}
-                onPress={(data, details = null)=>{
-                    console.log(data);
-                    console.log(details);
-                    
-                }}
-                query={{
-                    key:GOOGLE_MAPS_APIKEY,
-                    language:'en',
-                }}
-                styles={{
-                    container:{
-                        flex:0
-                    },
-                    textInput:{
-                        fontSize:18
-                    }
-                }}
-               
+                <Image
+                    source={{
+                        uri: 'https://links.papareact.com/gzs',
+
+                    }} style={{ width: 100, height: 100, resizeMode: 'contain' }} />
+                <GooglePlacesAutocomplete
+                    placeholder='Where From'
+                    styles={{
+                        container: {
+                            flex: 0
+                        },
+                        textInput: {
+                            fontSize: 18
+                        }
+                    }}
+                    onPress={(data,detils)=>{
+                        dispatch(setOrgin({
+                            location:{
+                                lat:detils?.geometry.location.lat,
+                                lng:detils?.geometry.location.lng
+                                
+                            },
+                        }))
+                        dispatch(setdestination(null))
+                    }}
+                    fetchDetails={true}
+                    // returnKeyType={'search'}
+                    nearbyPlacesAPI='GooglePlacesSearch'
+                    debounce={400}
+                    minLength={2}
+                    enablePoweredByContainer={false}
+                    query={{
+                        key: GOOGLE_MAPS_APIKEY,
+                        language: 'en',
+                    }}
+
+
                 />
-               <NavOption/>
+                <NavOption />
             </View>
         </SafeAreaView>
 
