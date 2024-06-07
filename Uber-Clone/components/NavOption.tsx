@@ -1,6 +1,7 @@
 import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Icon } from 'react-native-elements'
+import { useNavigation } from 'expo-router'
 
 
 
@@ -19,13 +20,16 @@ const data=[
 ]
 
 const NavOption:React.FC = () => {
+    const navigation=useNavigation()
   return (
     <FlatList
     data={data}
     horizontal
     keyExtractor={(item)=>item.id}
     renderItem={(item)=>(  
-        <TouchableOpacity className='p-2 pl-6 pb-8 bg-gray-200 m-2 w-40'>
+        <TouchableOpacity  
+        onPress={()=>navigation.navigate('MapScreen')} 
+        className='p-2 pl-6 pb-8 bg-gray-200 m-2 w-40'>
             <View>
                 <Image
                  source={{uri:item.item.image}}
