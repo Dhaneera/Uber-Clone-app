@@ -4,12 +4,17 @@ import type { RootState } from '../store'
 
 // Define a type for the slice state
 interface NavState {
-  value: number
+    origin: any;
+    destination: any;
+    travelTimeInfrormation: any;
+    
 }
 
 // Define the initial state using that type
 const initialState: NavState = {
-  value: 0,
+  origin:null,
+  destination:null,
+  travelTimeInfrormation:null
 }
 
 export const navSlice = createSlice({
@@ -17,22 +22,23 @@ export const navSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1
+    setOrgin: (state,action:PayloadAction) => {
+      return action.payload
     },
-    decrement: (state) => {
-      state.value -= 1
+    setdestination: (state,action:PayloadAction) => {
+      return action.payload
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload
+    settravelTimeInfrormation: (state, action: PayloadAction) => {
+      return action.payload
     },
   },
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { setOrgin, setdestination, settravelTimeInfrormation } = navSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCount = (state: RootState) => state.counter.value
-
-export default counterSlice.reducer
+export const selectOrgin = (state: RootState) => state.nav.origin
+export const selectDestination=(state:RootState) =>state.nav.destination
+export const selectTravelTimeInfrormation=(state:RootState) =>state.nav.travelTimeInfrormation
+export default navSlice.reducer

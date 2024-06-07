@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, Image } from 'react-native'
 import React, { useEffect, useLayoutEffect } from 'react'
 import { useNavigation } from 'expo-router'
 import { Header } from 'react-native/Libraries/NewAppScreen'
+import NavOption from '@/components/NavOption'
 
 const Home: React.FC = () => {
     const navigation = useNavigation()
@@ -13,9 +14,14 @@ const Home: React.FC = () => {
     }, [])
 
     return (
-        <SafeAreaView className=' w-full  h-full items-center justify-center'>
-            <View className=' justify-center items-center'>
-                <Text>Home</Text>
+        <SafeAreaView className='h-full'>
+            <View className='p-5'>
+               <Image
+               source={{
+                uri: 'https://links.papareact.com/gzs',
+                
+               }}style={{width:100,height:100,resizeMode:'contain'}} />
+               <NavOption/>
             </View>
         </SafeAreaView>
 

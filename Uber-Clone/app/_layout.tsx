@@ -7,7 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Home';
 import { Provider } from 'react-redux';
 import { store } from '@/store';
-
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NativeWindStyleSheet } from "nativewind";
 
 export type RootStackParamList={
   Home: undefined;
@@ -19,6 +20,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout:React.FC=()=> {
+
+  NativeWindStyleSheet.setOutput({
+    default: "native",
+  });
   
  
   const [loaded] = useFonts({
@@ -36,10 +41,14 @@ const RootLayout:React.FC=()=> {
   }
 
   return (
+
     <Provider store={store}>
+      <SafeAreaProvider>
       <Stack.Navigator>
         <Stack.Screen name='Home' component={Home} />
       </Stack.Navigator>
+      </SafeAreaProvider>
+      
     </Provider>
 
   );
