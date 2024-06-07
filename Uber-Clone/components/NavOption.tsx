@@ -29,13 +29,13 @@ const NavOption:React.FC = () => {
     renderItem={(item)=>(  
         <TouchableOpacity  
         onPress={()=>navigation.navigate('MapScreen')} 
-        className='p-2 pl-6 pb-8 bg-gray-200 m-2 w-40'>
+        className='p-2 pl-6 pb-8 bg-gray-200 m-2 mt-3 ml-0 w-44'>
             <View>
                 <Image
                  source={{uri:item.item.image}}
                  style={{width:120,height:120,resizeMode:'contain'}}/>
                  <Text className='mt-2 text-lg font-semibold ml-4'>{item.item.title}</Text>
-                 <Icon name='arrowright' color='white' type='antdesign' className=' p-2 bg-black rounded-full w-10 mt-4'/>
+                 <Icon name='arrowright' color='white' type='antdesign' className=' p-2 bg-black rounded-full w-10 mt-4 ml-3'/>
             </View>
         </TouchableOpacity>
     )}

@@ -48,7 +48,9 @@ const RootLayout: React.FC = () => {
         <SafeAreaProvider>
           <Stack.Navigator>
             <Stack.Screen name='Home' component={Home}/>
-            <Stack.Screen name='MapScreen' component={MapScreen} />
+            <Stack.Screen name='MapScreen' component={MapScreen} options={{
+              headerShown: false,
+            }} />
           </Stack.Navigator>
           </SafeAreaProvider>
     </Provider>
