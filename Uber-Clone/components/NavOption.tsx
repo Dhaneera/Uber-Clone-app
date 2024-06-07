@@ -2,6 +2,8 @@ import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Icon } from 'react-native-elements'
 import { useNavigation } from 'expo-router'
+import { useSelector } from 'react-redux'
+import { selectOrgin } from '@/features/navSlice'
 
 
 
@@ -21,6 +23,8 @@ const data=[
 
 const NavOption:React.FC = () => {
     const navigation=useNavigation()
+    const orgin = useSelector(selectOrgin)
+
   return (
     <FlatList
     data={data}
@@ -29,8 +33,10 @@ const NavOption:React.FC = () => {
     renderItem={(item)=>(  
         <TouchableOpacity  
         onPress={()=>navigation.navigate('MapScreen')} 
-        className='p-2 pl-6 pb-8 bg-gray-200 m-2 mt-3 ml-0 w-44'>
-            <View>
+        className='p-2 pl-6 pb-8 bg-gray-200 m-2 mt-3 ml-0 w-44'
+        disabled={!orgin}
+        >
+            <View className={`${!orgin && 'opacity-10'}`}>
                 <Image
                  source={{uri:item.item.image}}
                  style={{width:120,height:120,resizeMode:'contain'}}/>

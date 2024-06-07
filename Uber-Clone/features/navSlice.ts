@@ -11,7 +11,7 @@ interface Location {
 
 interface Origin {
   location: Location;
-  description: string;
+  description:string;
 }
 interface NavState {
     origin: Origin|null;
@@ -48,7 +48,7 @@ export const navSlice = createSlice({
 export const { setOrgin, setdestination, settravelTimeInfrormation } = navSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-// export const selectOrgin = (state: RootState) => state.nav.origin
+export const selectOrgin = (state: RootState) => state.nav.origin
 // export const selectDestination=(state:RootState) =>state.nav.destination
 // export const selectTravelTimeInfrormation=(state:RootState) =>state.nav.travelTimeInfrormation
 export default navSlice.reducer

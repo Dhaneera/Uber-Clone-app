@@ -27,13 +27,15 @@ const Home: React.FC = () => {
 
                     }} style={{ width: 100, height: 100, resizeMode: 'contain' }} />
                 <GooglePlacesAutocomplete
-                    placeholder='Where From'
+                    placeholder='from'
                     styles={{
                         container: {
-                            flex: 0
+                            flex: 0,
+                            width:350,
                         },
                         textInput: {
-                            fontSize: 18
+                            fontSize: 18,
+                            fontWeight:800,
                         }
                     }}
                     onPress={(data,detils)=>{
@@ -41,8 +43,9 @@ const Home: React.FC = () => {
                             location:{
                                 lat:detils?.geometry.location.lat,
                                 lng:detils?.geometry.location.lng
-                                
+                            
                             },
+                            description:data.description
                         }))
                         dispatch(setdestination(null))
                     }}
